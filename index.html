@@ -11,26 +11,44 @@
         <h1>Tic Tac Toe</h1>
     </nav>
     <main>
-        <table cellspacing="0">
-            <tbody>
-                <tr>
-                    <td class="box" id="b0"></td>
-                    <td class="box" id="b1"></td>
-                    <td class="box" id="b2"></td>
-                </tr>
-                <tr>
-                    <td class="box" id="b3"></td>
-                    <td class="box" id="b4"></td>
-                    <td class="box" id="b5"></td>
-                </tr>
-                <tr>
-                    <td class="box" id="b6"></td>
-                    <td class="box" id="b7"></td>
-                    <td class="box" id="b8"></td>
-                </tr>
-            </tbody>
-        </table>
-        <span class="result"></span>
+        <div class="header">
+            <form>
+                <div class="player__names">
+                    <label for="player1">Enter Player 1 name: </label>
+                    <input type="text" id="player1">
+                    <label for="player2">Enter Player 2 name: </label>
+                    <input type="text" id="player2">
+                </div>
+                <button class="start">New Game</button>
+            </form>
+        </div>
+        <section class="table__section">
+            <span class="player1__result">0</span>
+            <table cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td class="box" id="b0"></td>
+                        <td class="box" id="b1"></td>
+                        <td class="box" id="b2"></td>
+                    </tr>
+                    <tr>
+                        <td class="box" id="b3"></td>
+                        <td class="box" id="b4"></td>
+                        <td class="box" id="b5"></td>
+                    </tr>
+                    <tr>
+                        <td class="box" id="b6"></td>
+                        <td class="box" id="b7"></td>
+                        <td class="box" id="b8"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <span class="player2__result">0</span>
+        </section>
+        <div class="settings">
+            <span class="result"></span>
+            <button class="restart" onclick="displayController.restart()">Restart</button>
+        </div>
     </main>
 </body>
 <script src="script.js"></script>

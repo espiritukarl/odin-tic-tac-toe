@@ -14,8 +14,15 @@ h1 {
     font-weight: bold;
 }
 
+main {
+    min-width: none;
+}
+
+
 table {
-    margin: 7vh;
+    display: flex;
+    justify-content: center;
+    margin: 3vh;
 }
 
 .box {
@@ -32,7 +39,7 @@ table {
     border-bottom: 1px solid;
 }
 
-td:hover {
+td:hover, .restart:hover, .start:hover {
     cursor: pointer;
     background-color: rgba(218, 201, 201, 0.247);
 }
@@ -42,10 +49,72 @@ td {
     text-align: center;
 }
 
-.result {
+.settings {
     font-size: 2em;
     min-height: 24px;
     max-height: 24px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.restart, .start {
+    border: 1px solid black;
+    background-color: rgb(255, 132, 132);
+    padding: 15px;
+    border-radius: 15px;
+    font-size: 24px;
+}
+
+.restart {
+    display: none;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.player__names {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.table__section {
+    min-width: 60vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table__section span {
+    font-weight: bold;
+    font-size: 10em;
+}
+
+#player1 {
+    margin-right: 50px;
+}
+
+input, input:active {
+    margin-left: 5px;
+    padding: 5px;
+    border: none;
+    border-radius: 5%;
+    background-color: rgb(196, 128, 128);
+}
+
+.player1__result, .player2__result {
+    font-size: 2em;
 }

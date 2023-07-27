@@ -1,12 +1,20 @@
 const gameboard = (() => {
+    const startButton = document.getElementsByClassName("start")[0]
 
     // creating the players
-    const Player = (name, mark, turn, won) => {
-        return {name, mark, turn, won}
+    const Player = (name, mark, turn, won, score) => {
+        return {name, mark, turn, won, score}
     }
 
-    let player1 = Player("player1", "O", true, false)
-    let player2 = Player("player2", "X", false, false)
+    let player1 = Player()
+    let player2 = Player()
+
+    startButton.addEventListener('click', (event) => {
+        event.preventDefault()
+
+        player1 = Player(document.getElementsByTagName("input")[0].value, "O", true, false, 0)
+        player2 = Player(document.getElementsByTagName("input")[1].value, "X", false, false, 0)
+    })
 
     const winCombos = [
         [0,1,2],
@@ -68,15 +76,26 @@ const gameboard = (() => {
 
         if (player1.won = winCondition(player1.name, player1.mark).winner) {
             result = winCondition(player1.name, player1.mark).result
+            player1.score++
         } else if (player2.won = winCondition(player2.name, player2.mark).winner) {
             result = winCondition(player2.name, player2.mark).result
+            player2.score++
         }
 
         winner = player1.won || player2.won
 
         return {
             winner,
-            result
+            result,
+        }
+    }
+
+    const displayScore = () => {
+        let score1 = player1.score
+        let score2 = player2.score
+        return {
+            score1,
+            score2
         }
     }
     
@@ -87,6 +106,7 @@ const gameboard = (() => {
 
     return {
         resetTurn,
+        displayScore,
         checkWinner,
         Gameplay,
         winCondition,
@@ -96,35 +116,41 @@ const gameboard = (() => {
 const displayController = (() => {
     const tictactoeBox = Array.from(document.getElementsByClassName("box"))
     const result = document.getElementsByClassName("result")[0]
+    const player1_score = document.getElementsByClassName("player1__result")[0]
+    const player2_score = document.getElementsByClassName("player2__result")[0]
+    const restartButton = document.getElementsByClassName("restart")[0]
     let arr = []
 
-    let delayTimer = (element) => {
-        setTimeout(() => {element.textContent = ''}, 1000)
+    const restart = () => {
+        deleteContent()
+        restartButton.style.display = 'none'
     }
 
-    let deleteContent = () => {
+    const deleteContent = () => {
         arr = []
         gameboard.resetTurn()
+        result.textContent = ''
         tictactoeBox.forEach((element) => {
-            delayTimer(element)
+            element.textContent = ''
         })
     }
 
-    let printing = tictactoeBox.forEach((element) => {
+    const printing = tictactoeBox.forEach((element) => {
         element.addEventListener('click', () => {
-            if (element.textContent === '') {
+            if (element.textContent === '' && result.textContent === '') {
                 element.textContent = gameboard.Gameplay()
-                arr.push(element.textContent)
-                
+                if(element.textContent !== '') {
+                    arr.push(element.textContent)
+                }                
                 if (gameboard.checkWinner().winner) {
                     result.textContent = gameboard.checkWinner().result
-                    deleteContent()
-                    delayTimer(result)
+                    player1_score.textContent = gameboard.displayScore().score1/2
+                    player2_score.textContent = gameboard.displayScore().score2/2
+                    restartButton.style.display = 'block'
                 }
                 else if (arr.length === 9) {
                     result.textContent = 'Draw'
-                    deleteContent()
-                    delayTimer(result)
+                    restartButton.style.display = 'block'
                 }
             }
         })
@@ -133,7 +159,8 @@ const displayController = (() => {
     return {
         tictactoeBox,
         printing,
-        result
+        result,
+        restart
     } 
 })()
 
