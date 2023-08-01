@@ -115,6 +115,19 @@ input, input:active {
     background-color: rgb(196, 128, 128);
 }
 
-.player1__result, .player2__result {
-    font-size: 2em;
+.player__name {
+    font-size: 6em;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.player__result {
+    font-size: 4em;
+}
+
+.score_board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100px;
 }

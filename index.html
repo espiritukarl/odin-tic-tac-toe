@@ -15,15 +15,20 @@
             <form>
                 <div class="player__names">
                     <label for="player1">Enter Player 1 name: </label>
-                    <input type="text" id="player1">
+                    <input type="text" id="player1" value="Karl">
                     <label for="player2">Enter Player 2 name: </label>
-                    <input type="text" id="player2">
+                    <input type="text" id="player2" value="TM">
                 </div>
                 <button class="start">New Game</button>
             </form>
         </div>
         <section class="table__section">
-            <span class="player1__result">0</span>
+
+            <section class="score_board">
+                <div class="player__name"></div>
+                <div class="player__result"></div>
+            </section>
+
             <table cellspacing="0">
                 <tbody>
                     <tr>
@@ -43,7 +48,12 @@
                     </tr>
                 </tbody>
             </table>
-            <span class="player2__result">0</span>
+
+            <section class="score_board">
+                <div class="player__name"></div>
+                <div class="player__result"></div>
+            </section>
+
         </section>
         <div class="settings">
             <span class="result"></span>

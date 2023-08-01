@@ -1,5 +1,7 @@
 const gameboard = (() => {
     const startButton = document.getElementsByClassName("start")[0]
+    const playerNames = document.getElementsByClassName("player__name")
+    const inputTags = document.getElementsByTagName("input")
 
     // creating the players
     const Player = (name, mark, turn, won, score) => {
@@ -8,12 +10,21 @@ const gameboard = (() => {
 
     let player1 = Player()
     let player2 = Player()
-
+    
     startButton.addEventListener('click', (event) => {
         event.preventDefault()
 
-        player1 = Player(document.getElementsByTagName("input")[0].value, "O", true, false, 0)
-        player2 = Player(document.getElementsByTagName("input")[1].value, "X", false, false, 0)
+        displayController.restart()
+        player1 = Player(inputTags[0].value, "O", true, false, 0)
+        player2 = Player(inputTags[1].value, "X", false, false, 0)
+
+        displayController.player_score[0].textContent = 0
+        displayController.player_score[1].textContent = 0
+
+        playerNames[0].textContent = player1.name
+        playerNames[1].textContent = player2.name
+        inputTags[0].value = ''
+        inputTags[1].value = ''
     })
 
     const winCombos = [
@@ -99,36 +110,30 @@ const gameboard = (() => {
         }
     }
     
-    const resetTurn = () => {
-        player1.turn = true
-        player2.turn = false
-    }
+    // const resetTurn = () => {
+    //     player1.turn = true
+    //     player2.turn = false
+    // }
 
     return {
-        resetTurn,
+        // resetTurn,
         displayScore,
         checkWinner,
         Gameplay,
-        winCondition,
     }
 })()
 
 const displayController = (() => {
     const tictactoeBox = Array.from(document.getElementsByClassName("box"))
     const result = document.getElementsByClassName("result")[0]
-    const player1_score = document.getElementsByClassName("player1__result")[0]
-    const player2_score = document.getElementsByClassName("player2__result")[0]
+    const player_score = document.getElementsByClassName("player__result")
     const restartButton = document.getElementsByClassName("restart")[0]
     let arr = []
 
     const restart = () => {
-        deleteContent()
         restartButton.style.display = 'none'
-    }
-
-    const deleteContent = () => {
         arr = []
-        gameboard.resetTurn()
+        // gameboard.resetTurn()
         result.textContent = ''
         tictactoeBox.forEach((element) => {
             element.textContent = ''
@@ -144,8 +149,8 @@ const displayController = (() => {
                 }                
                 if (gameboard.checkWinner().winner) {
                     result.textContent = gameboard.checkWinner().result
-                    player1_score.textContent = gameboard.displayScore().score1/2
-                    player2_score.textContent = gameboard.displayScore().score2/2
+                    player_score[0].textContent = gameboard.displayScore().score1/2
+                    player_score[1].textContent = gameboard.displayScore().score2/2
                     restartButton.style.display = 'block'
                 }
                 else if (arr.length === 9) {
@@ -160,6 +165,7 @@ const displayController = (() => {
         tictactoeBox,
         printing,
         result,
+        player_score,
         restart
     } 
 })()
