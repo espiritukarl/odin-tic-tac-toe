@@ -144,9 +144,7 @@ const displayController = (() => {
         element.addEventListener('click', () => {
             if (element.textContent === '' && result.textContent === '') {
                 element.textContent = gameboard.Gameplay()
-                if(element.textContent !== '') {
-                    arr.push(element.textContent)
-                }                
+                arr.push(element.textContent)         
                 if (gameboard.checkWinner().winner) {
                     result.textContent = gameboard.checkWinner().result
                     player_score[0].textContent = gameboard.displayScore().score1/2
