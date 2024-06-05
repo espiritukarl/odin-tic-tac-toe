@@ -15,8 +15,15 @@ const gameboard = (() => {
         event.preventDefault()
 
         displayController.restart()
-        player1 = Player(inputTags[0].value, "O", true, false, 0)
-        player2 = Player(inputTags[1].value, "X", false, false, 0)
+        let player1Name = inputTags[0].value
+        let player2Name = inputTags[1].value
+
+        if (player1Name === "") player1Name = "Player 1"
+        if (player2Name === "") player2Name = "Player 2"
+
+
+        player1 = Player(player1Name, "O", true, false, 0)
+        player2 = Player(player2Name, "X", false, false, 0)
 
         displayController.player_score[0].textContent = 0
         displayController.player_score[1].textContent = 0
