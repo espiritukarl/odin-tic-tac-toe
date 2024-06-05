@@ -116,9 +116,13 @@ input, input:active {
 }
 
 .player__name {
-    font-size: 6em;
+    font-size: 4em;
     font-weight: bold;
     margin-bottom: 25px;
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .player__result {
@@ -129,5 +133,5 @@ input, input:active {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 100px;
+    max-width: 150px;
 }
